@@ -1,37 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Business.Abstract;
-using Entities.Concrete;
+using Core.Abstract;
 
-namespace Business.Concrete
+namespace Core.DataAccess.EntityFramework
 {
-    public class TissueManager : ITissueService
+    public class EFEntityRepositoryBase<TContext, TEntity> : IEntityRepository<TEntity>
     {
-        public void Add(Tissue tissue)
+        public void Add(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Tissue tissue)
+        public void Delete(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Tissue tissue)
+        public List<TEntity> Get()
         {
             throw new NotImplementedException();
         }
 
-        public List<Tissue> Get()
+        public List<TEntity> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public List<Tissue> GetAll()
+        public void Update(TEntity entity)
         {
             throw new NotImplementedException();
         }
-
     }
 }

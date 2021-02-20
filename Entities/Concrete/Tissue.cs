@@ -1,11 +1,11 @@
-﻿using Entities.Abstract;
+﻿using Core.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Entities.Concrete
 {
-    class Tissue:IEntity
+    public class Tissue:IEntity
     {
         public int Id { get; set; }
         public int TypeId { get; set; }
