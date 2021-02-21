@@ -2,12 +2,22 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Core.Abstract;
+using DataAccess.Abstract;
+using Entities;
 using Entities.Concrete;
 
 namespace Business.Concrete
 {
     public class TissueManager : ITissueService
     {
+        private ITissueDal _tissueDal;
+
+        public TissueManager(ITissueDal tissueDal)
+        {
+            _tissueDal = tissueDal;
+        }
+
         public void Add(Tissue tissue)
         {
             throw new NotImplementedException();
@@ -30,8 +40,12 @@ namespace Business.Concrete
 
         public List<Tissue> GetAll()
         {
-            throw new NotImplementedException();
+            return _tissueDal.GetAll();
         }
 
+        public List<ProductDetailDto> GetDetail()
+        {
+            return _tissueDal.GetDetail();
+        }
     }
 }

@@ -1,4 +1,8 @@
 ﻿using System;
+using Business.Abstract;
+using Business.Concrete;
+using DataAccess.Abstract;
+using DataAccess.Concrete;
 
 namespace UI
 {
@@ -6,7 +10,13 @@ namespace UI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ITissueService tissueService = new TissueManager(new TissueDal());
+            foreach (var tissues in tissueService.GetDetail())
+            {
+                Console.WriteLine(tissues.Id + ":" + tissues.Name + "," + tissues.Type + "," + tissues.Region + "," + tissues.Origin);
+            }
+
+            Console.ReadLine();
         }
     }
 }
