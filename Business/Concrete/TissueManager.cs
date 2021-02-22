@@ -20,19 +20,20 @@ namespace Business.Concrete
             _tissueDal = tissueDal;
         }
 
-        public IResult<object> Add(Tissue tissue)
+        public IResult<Tissue> Add(Tissue tissue)
         {
-            return new SuccessResult<object>(Messages.success);
+            _tissueDal.Add(tissue);
+            return new SuccessResult<Tissue>(Messages.success);
         }
 
-        public IResult<object> Delete(Tissue tissue)
+        public IResult<Tissue> Delete(Tissue tissue)
         {
-            return new SuccessResult<object>(Messages.success);
+            return new SuccessResult<Tissue>(Messages.success);
         }
 
-        public IResult<object> Update(Tissue tissue)
+        public IResult<Tissue> Update(Tissue tissue)
         {
-            return new SuccessResult<object>(Messages.success);
+            return new SuccessResult<Tissue>(Messages.success);
         }
         
         public IResult<Tissue> GetById(int id)
