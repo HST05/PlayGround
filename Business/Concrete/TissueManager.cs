@@ -11,7 +11,7 @@ namespace Business.Concrete
 {
     public class TissueManager : ITissueService
     {
-        private ITissueDal _tissueDal;
+        ITissueDal _tissueDal;
 
         public TissueManager(ITissueDal tissueDal)
         {
