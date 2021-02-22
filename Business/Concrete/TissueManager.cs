@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Business.Consts;
 using Core.Abstract;
+using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities;
 using Entities.Concrete;
@@ -38,9 +40,13 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
-        public List<Tissue> GetAll()
+        public IResult<List<Tissue>> GetAll()
         {
-            return _tissueDal.GetAll();
+            if (DateTime.Now.Hour==17)
+            {
+                return new FailResult<List<Tissue>>(Messages.fail);
+            }
+            return new SuccessResult<List<Tissue>>(_tissueDal.GetAll(), Messages.success);
         }
 
         public List<ProductDetailDto> GetDetail()

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Business.Consts;
 using Entities;
+using Core.Utilities.Result;
 
 namespace Business.Abstract
 {
@@ -12,7 +13,7 @@ namespace Business.Abstract
         void Add(Tissue tissue);
         void Delete(Tissue tissue);
         void Update(Tissue tissue);
-        List<Tissue> GetAll();
+        IResult<List<Tissue>> GetAll();
         List<Tissue> Get();
         List<ProductDetailDto> GetDetail();
 
