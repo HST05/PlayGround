@@ -20,24 +20,24 @@ namespace Business.Concrete
             _tissueDal = tissueDal;
         }
 
-        public void Add(Tissue tissue)
+        public IResult<object> Add(Tissue tissue)
         {
-            throw new NotImplementedException();
+            return new SuccessResult<object>(Messages.success);
         }
 
-        public void Delete(Tissue tissue)
+        public IResult<object> Delete(Tissue tissue)
         {
-            throw new NotImplementedException();
+            return new SuccessResult<object>(Messages.success);
         }
 
-        public void Update(Tissue tissue)
+        public IResult<object> Update(Tissue tissue)
         {
-            throw new NotImplementedException();
+            return new SuccessResult<object>(Messages.success);
         }
-
-        public List<Tissue> Get()
+        
+        public IResult<Tissue> GetById(int id)
         {
-            throw new NotImplementedException();
+            return new SuccessResult<Tissue>(Messages.success, _tissueDal.Get(p=>p.Id==id));
         }
 
         public IResult<List<Tissue>> GetAll()
@@ -46,12 +46,12 @@ namespace Business.Concrete
             {
                 return new FailResult<List<Tissue>>(Messages.fail);
             }
-            return new SuccessResult<List<Tissue>>(_tissueDal.GetAll(), Messages.success);
+            return new SuccessResult<List<Tissue>>(Messages.success, _tissueDal.GetAll());
         }
 
-        public List<ProductDetailDto> GetDetail()
+        public IResult<List<ProductDetailDto>> GetDetail()
         {
-            return _tissueDal.GetDetail();
+            return new SuccessResult<List<ProductDetailDto>>(Messages.success, _tissueDal.GetDetail());
         }
     }
 }

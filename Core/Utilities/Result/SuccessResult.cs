@@ -5,7 +5,7 @@ namespace Core.Utilities.Result
 {
     public class SuccessResult<T>:ResultBase<T>
     {
-        public SuccessResult(T data, string message):base(true, message, data)
+        public SuccessResult(string message, T data=default):base(true, message, data)
         {
             
         }
