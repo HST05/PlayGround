@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
 using Business.Consts;
+using Business.Validations.FluentValidation;
 using Core.Abstract;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities;
 using Entities.Concrete;
+using FluentValidation;
 
 namespace Business.Concrete
 {
@@ -20,20 +24,23 @@ namespace Business.Concrete
             _tissueDal = tissueDal;
         }
 
+        [ValidationAspect(typeof(TissueValidator))]
         public IResult<Tissue> Add(Tissue tissue)
         {
+            //ValidationTool.Validate(new TissueValidator(), tissue);
+
             _tissueDal.Add(tissue);
-            return new SuccessResult<Tissue>(Messages.success);
+            return new SuccessResult<Tissue>(Messages.success, tissue);
         }
 
         public IResult<Tissue> Delete(Tissue tissue)
         {
-            return new SuccessResult<Tissue>(Messages.success);
+            return new SuccessResult<Tissue>(Messages.success, tissue);
         }
 
         public IResult<Tissue> Update(Tissue tissue)
         {
-            return new SuccessResult<Tissue>(Messages.success);
+            return new SuccessResult<Tissue>(Messages.success, tissue);
         }
         
         public IResult<Tissue> GetById(int id)

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
 using Entities;
 using Entities.Concrete;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using System.Linq;
 
-namespace DataAccess.Concrete
+namespace DataAccess.Concrete.EntityFramework
 {
     public class TissueDal : EFEntityRepositoryBase<AnatomyDB, Tissue>, ITissueDal
     {
