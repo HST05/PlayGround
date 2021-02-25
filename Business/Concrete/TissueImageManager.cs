@@ -50,7 +50,7 @@ namespace Business.Concrete
             {
                 foreach (var error in result)
                 {
-                    return new FailResult<List<TissueImage>>(error.Message); default bir foto gelicek buraya.
+                    return new FailResult<List<TissueImage>>(error.Message); default bir foto gelicek buraya
                 }
             }
             return new SuccessResult<List<TissueImage>>(Messages.success, _tissueImageDal.GetAll(p=>p.TissueId==tissueId));
