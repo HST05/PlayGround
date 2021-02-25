@@ -11,7 +11,7 @@ namespace Business.Validations.FluentValidation
         public TissueValidator()
         {
             RuleFor(p => p.Name).MinimumLength(2);
-            RuleFor(p => p.Name).Must(StartsWithN).WithMessage("aaaaağğğğğğğhhhhhhh");
+            RuleFor(p => p.Name).Must(StartsWithN).WithMessage("Ürün adı N ile başlamalı");
         }
 
         private bool StartsWithN(string arg)

@@ -7,27 +7,37 @@ using Business.Validations.FluentValidation;
 using Core.Abstract;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
+using Core.Utilities.BusinessRules;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities;
 using Entities.Concrete;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Business.Concrete
 {
     public class TissueManager : ITissueService
     {
         ITissueDal _tissueDal;
+        private ISortService _sortService;
 
-        public TissueManager(ITissueDal tissueDal)
+        public TissueManager(ITissueDal tissueDal, ISortService sortService)
         {
             _tissueDal = tissueDal;
+            _sortService = sortService;
         }
 
         [ValidationAspect(typeof(TissueValidator))]
         public IResult<Tissue> Add(Tissue tissue)
         {
             //ValidationTool.Validate(new TissueValidator(), tissue);
+            var result = BusinessRules<IEntity>.Checker(DuplicateNameChecker(tissue.Name), SortLimitExceedChecker(3));
+
+            if (result != null)
+            {
+                return new FailResult<Tissue>(result.Message);
+            }
 
             _tissueDal.Add(tissue);
             return new SuccessResult<Tissue>(Messages.success, tissue);
@@ -42,15 +52,15 @@ namespace Business.Concrete
         {
             return new SuccessResult<Tissue>(Messages.success, tissue);
         }
-        
+
         public IResult<Tissue> GetById(int id)
         {
-            return new SuccessResult<Tissue>(Messages.success, _tissueDal.Get(p=>p.Id==id));
+            return new SuccessResult<Tissue>(Messages.success, _tissueDal.Get(p => p.Id == id));
         }
 
         public IResult<List<Tissue>> GetAll()
         {
-            if (DateTime.Now.Hour==17)
+            if (DateTime.Now.Hour == 17)
             {
                 return new FailResult<List<Tissue>>(Messages.fail);
             }
@@ -60,6 +70,28 @@ namespace Business.Concrete
         public IResult<List<ProductDetailDto>> GetDetail()
         {
             return new SuccessResult<List<ProductDetailDto>>(Messages.success, _tissueDal.GetDetail());
+        }
+
+        private IResult<IEntity> DuplicateNameChecker(string productName)
+        {
+            var result = _tissueDal.GetAll(p => p.Name == productName).Any();
+
+            if (!result)
+            {
+                return new FailResult<IEntity>(Messages.duplicateName);
+            }
+            return new SuccessResult<IEntity>(Messages.success);
+        }
+
+        private IResult<IEntity> SortLimitExceedChecker(int sortId)
+        {
+            var result = _sortService.GetAll().Data.Count;
+
+            if (result>15)
+            {
+                return new FailResult<IEntity>(Messages.sortLimit);
+            }
+            return new SuccessResult<IEntity>(Messages.success);
         }
     }
 }

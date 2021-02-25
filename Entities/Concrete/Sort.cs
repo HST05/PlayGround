@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entities.Concrete
 {
-    public class Type:IEntity
+    public class Sort:IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

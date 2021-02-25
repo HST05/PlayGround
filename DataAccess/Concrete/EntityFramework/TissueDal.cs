@@ -13,10 +13,10 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (AnatomyDB context = new AnatomyDB())
             {
-                var result = from ti in context.Tissues
-                             join r in context.Regions on ti.RegionId equals r.Id
-                             join ty in context.Types on ti.TypeId equals ty.Id                                                
-                    select new ProductDetailDto {Id = ti.Id, Region = r.Name, Name = ti.Name, Gender = ti.Gender, Type = ty.Name, Origin = ty.Origin};
+                var result = from t in context.Tissues
+                             join r in context.Regions on t.RegionId equals r.Id
+                             join s in context.Sorts on t.SortId equals s.Id                                                
+                    select new ProductDetailDto {Id = t.Id, Region = r.Name, Name = t.Name, Gender = t.Gender, Sort = s.Name, Origin = s.Origin};
                 return result.ToList();
             }
 

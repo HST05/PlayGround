@@ -1,6 +1,6 @@
 ﻿using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
-using Type = Entities.Concrete.Type;
+using Sort = Entities.Concrete.Sort;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -13,6 +13,6 @@ namespace DataAccess.Concrete.EntityFramework
 
         public DbSet<Tissue> Tissues { get; set; }
         public DbSet<Region> Regions { get; set; }
-        public DbSet<Type> Types { get; set; }
+        public DbSet<Sort> Sorts { get; set; }
     }
 }

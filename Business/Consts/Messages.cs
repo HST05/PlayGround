@@ -8,5 +8,7 @@ namespace Business.Consts
     {
         public static string success = "Process Succeed !!!";
         public static string fail = "Process Failed !!!";
+        public static string duplicateName = "Duplicate name has been detected";
+        public static string sortLimit = "Sort limit exceed";
     }
 }
