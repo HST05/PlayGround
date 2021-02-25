@@ -32,11 +32,14 @@ namespace Business.Concrete
         public IResult<Tissue> Add(Tissue tissue)
         {
             //ValidationTool.Validate(new TissueValidator(), tissue);
-            var result = BusinessRules<IEntity>.Checker(DuplicateNameChecker(tissue.Name), SortLimitExceedChecker(3));
+            var result = BusinessRules<Tissue>.Checker(DuplicateNameChecker(tissue.Name), SortLimitExceedChecker(3));
 
             if (result != null)
             {
-                return new FailResult<Tissue>(result.Message);
+                foreach (var error in result)
+                {
+                    return new FailResult<Tissue>(error.Message);
+                }
             }
 
             _tissueDal.Add(tissue);
@@ -72,26 +75,26 @@ namespace Business.Concrete
             return new SuccessResult<List<ProductDetailDto>>(Messages.success, _tissueDal.GetDetail());
         }
 
-        private IResult<IEntity> DuplicateNameChecker(string productName)
+        private IResult<Tissue> DuplicateNameChecker(string productName)
         {
             var result = _tissueDal.GetAll(p => p.Name == productName).Any();
 
             if (!result)
             {
-                return new FailResult<IEntity>(Messages.duplicateName);
+                return new FailResult<Tissue>(Messages.duplicateName);
             }
-            return new SuccessResult<IEntity>(Messages.success);
+            return new SuccessResult<Tissue>(Messages.success);
         }
 
-        private IResult<IEntity> SortLimitExceedChecker(int sortId)
+        private IResult<Tissue> SortLimitExceedChecker(int sortId)
         {
             var result = _sortService.GetAll().Data.Count;
 
             if (result>15)
             {
-                return new FailResult<IEntity>(Messages.sortLimit);
+                return new FailResult<Tissue>(Messages.sortLimit);
             }
-            return new SuccessResult<IEntity>(Messages.success);
+            return new SuccessResult<Tissue>(Messages.success);
         }
     }
 }

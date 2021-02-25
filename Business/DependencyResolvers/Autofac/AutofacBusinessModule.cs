@@ -19,8 +19,12 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<TissueManager>().As<ITissueService>().SingleInstance();
             builder.RegisterType<TissueDal>().As<ITissueDal>().SingleInstance();
 
-            builder.RegisterType<SortDal>().As<ISortDal>().SingleInstance();
             builder.RegisterType<SortManager>().As<ISortService>().SingleInstance();
+            builder.RegisterType<SortDal>().As<ISortDal>().SingleInstance();
+
+            builder.RegisterType<TissueImageManager>().As<ITissueImageService>().SingleInstance();
+            builder.RegisterType<TissueImageDal>().As<ITissueImageDal>().SingleInstance();
+            
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

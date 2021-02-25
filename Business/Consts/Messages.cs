@@ -10,5 +10,6 @@ namespace Business.Consts
         public static string fail = "Process Failed !!!";
         public static string duplicateName = "Duplicate name has been detected";
         public static string sortLimit = "Sort limit exceed";
+        public static string imageCountExceed = "Image count exceed";
     }
 }
