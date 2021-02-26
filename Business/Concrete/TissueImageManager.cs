@@ -22,7 +22,7 @@ namespace Business.Concrete
 
         public IResult<TissueImage> Add(TissueImage tissueImage)
         {
-            var result = BusinessRules<TissueImage>.Checker(ImageCountChecker(3));
+            var result = BusinessRules<TissueImage>.Checker(ImageCountChecker(tissueImage.TissueId));
 
             if (result != null)
             {

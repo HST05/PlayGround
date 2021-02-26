@@ -25,45 +25,48 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("imageadd")]
-        public string Add([FromForm] Image image)
+        public IActionResult Add([FromForm] Image imageFile, [FromForm] int tissueId)
         {
-
             try
             {
-                if (image.ImageFile.Length > 0)
+                if (imageFile.ImageFile.Length > 0)
                 {
-                    string path = "C:\\Users\\Windows 8\\Desktop\\ChaTho The Programmer\\test\\web api\\";
-                    Guid guid = Guid.NewGuid();
-                    string ext = System.IO.Path.GetExtension(image.ImageFile.FileName);
-                    string imageName = $"{guid}" + ext;
+                    TissueImage tissueImage = new TissueImage { TissueId = tissueId };
+                    var result = _tissueImageService.Add(tissueImage);
 
-                    using (FileStream fileStream = System.IO.File.Create(path + imageName))
+                    if (result.Success)
                     {
-                        image.ImageFile.CopyTo(fileStream);
-                        fileStream.Flush();
-                        return "uploaded.";
+                        string path = "C:\\Users\\Windows 8\\Desktop\\ChaTho The Programmer\\test\\web api\\";
+                        tissueImage.ImagePath = path;
+
+                        Guid guid = Guid.NewGuid();
+                        string extension = System.IO.Path.GetExtension(imageFile.ImageFile.FileName);
+                        string imageName = $"{guid}" + extension;
+
+                        using (FileStream fileStream = System.IO.File.Create(path + imageName))
+                        {
+                            imageFile.ImageFile.CopyTo(fileStream);
+                            fileStream.Flush();
+
+                            _tissueImageService.Update(tissueImage);
+                            return Ok("Uploaded");
+                        }
+                    }
+                    else
+                    {
+                        return BadRequest(result.Message);
                     }
                 }
                 else
                 {
-                    return "not uploaded";
+                    return BadRequest("Not Uploaded");
                 }
             }
             catch (Exception e)
             {
 
-                return e.Message;
+                return BadRequest(e.Message);
             }
-
-
-
-            //var result = _tissueImageService.Add(tissueImage);
-            //if (result.Success)
-            //{
-            //    return Ok(result);
-            //}
-
-            //return BadRequest(result);
         }
     }
 }
