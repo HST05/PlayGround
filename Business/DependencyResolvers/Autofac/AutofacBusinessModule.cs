@@ -6,6 +6,9 @@ using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
 using Castle.DynamicProxy;
+using Core.Utilities.Filing;
+using Core.Utilities.Filing.Database;
+using Core.Utilities.Filing.Local;
 using Core.Utilities.Interceptors;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
@@ -21,10 +24,13 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<SortManager>().As<ISortService>().SingleInstance();
             builder.RegisterType<SortDal>().As<ISortDal>().SingleInstance();
-
+            
             builder.RegisterType<TissueImageManager>().As<ITissueImageService>().SingleInstance();
             builder.RegisterType<TissueImageDal>().As<ITissueImageDal>().SingleInstance();
-            
+
+            builder.RegisterType<ImageLocalFiling>().As<LocalFileSystem>().SingleInstance();
+            builder.RegisterType<ImageDbFiling>().As<DatabaseFileSytem>().SingleInstance();
+
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

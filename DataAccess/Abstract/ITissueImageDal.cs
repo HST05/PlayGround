@@ -8,7 +8,6 @@ namespace DataAccess.Abstract
 {
     public interface ITissueImageDal:IEntityRepository<TissueImage>
     {
-        void AddImage(TissueImage tissueImage);
-        void UpdateImage(TissueImage tissueImage);
+
     }
 }

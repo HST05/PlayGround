@@ -11,5 +11,7 @@ namespace Entities.Concrete
         public int TissueId { get; set; }
         public string ImagePath { get; set; }
         public DateTime Date { get; set; }
+        public byte[] Image { get; set; }
+        public string Guid { get; set; }
     }
 }
