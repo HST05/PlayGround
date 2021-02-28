@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Consts;
 using Business.Validations.FluentValidation;
 using Core.Abstract;
@@ -32,6 +33,7 @@ namespace Business.Concrete
             _databaseFileSytem = databaseFileSytem;
         }
 
+        [SecuredOperation("")]
         [ValidationAspect(typeof(TissueImageValidator))]
         public IResult<TissueImage> Add(IFile file, int tissueId)
         {

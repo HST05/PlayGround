@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Concrete;
+using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
@@ -14,5 +15,8 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Region> Regions { get; set; }
         public DbSet<Sort> Sorts { get; set; }
         public DbSet<TissueImage> TissueImages { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+
     }
 }

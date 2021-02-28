@@ -10,6 +10,7 @@ using Core.Utilities.Filing;
 using Core.Utilities.Filing.Database;
 using Core.Utilities.Filing.Local;
 using Core.Utilities.Interceptors;
+using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 
@@ -30,6 +31,12 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<ImageLocalFiling>().As<LocalFileSystem>().SingleInstance();
             builder.RegisterType<ImageDbFiling>().As<DatabaseFileSytem>().SingleInstance();
+
+            builder.RegisterType<UserManager>().As<IUserService>();
+            builder.RegisterType<UserDal>().As<IUserDal>();
+
+            builder.RegisterType<AuthManager>().As<IAuthService>();
+            builder.RegisterType<JWTHelper>().As<ITokenHelper>();
 
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
