@@ -12,7 +12,7 @@ namespace UI
         {
             //NewMethod();
 
-            //Console.WriteLine(DateTime.Now);
+            //Console.WriteLine(DateTime.Now.hour);
 
             Console.ReadLine();
         }
