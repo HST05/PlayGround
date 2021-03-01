@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using Core.Abstract;
-using Microsoft.AspNetCore.Http;
 
 namespace Core.Utilities.Filing
 {

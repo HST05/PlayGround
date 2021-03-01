@@ -9,14 +9,12 @@ using Business.Validations.FluentValidation;
 using Core.Abstract;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.BusinessRules;
-using Core.Utilities.Filing;
 using Core.Utilities.Filing.Database;
 using Core.Utilities.Filing.Local;
 using Core.Utilities.Guids;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
-using Microsoft.AspNetCore.Http;
 
 namespace Business.Concrete
 {
@@ -33,7 +31,7 @@ namespace Business.Concrete
             _databaseFileSytem = databaseFileSytem;
         }
 
-        [SecuredOperation("")]
+        [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(TissueImageValidator))]
         public IResult<TissueImage> Add(IFile file, int tissueId)
         {

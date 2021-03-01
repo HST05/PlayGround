@@ -1,15 +1,10 @@
-﻿using System;
+﻿using Business.Abstract;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Helpers;
-using Business.Abstract;
-using Entities.Concrete;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using WebAPI.Files;
 
 namespace WebAPI.Controllers

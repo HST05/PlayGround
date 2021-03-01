@@ -10,9 +10,10 @@ using Core.Utilities.Filing;
 using Core.Utilities.Filing.Database;
 using Core.Utilities.Filing.Local;
 using Core.Utilities.Interceptors;
-using Core.Utilities.Security.JWT;
+using Core.Utilities.Security.Jwt;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using Microsoft.AspNetCore.Http;
 
 namespace Business.DependencyResolvers.Autofac
 {
@@ -36,7 +37,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<UserDal>().As<IUserDal>();
 
             builder.RegisterType<AuthManager>().As<IAuthService>();
-            builder.RegisterType<JWTHelper>().As<ITokenHelper>();
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>();
+
+            builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>();
 
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
