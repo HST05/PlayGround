@@ -36,39 +36,39 @@ namespace Business.Concrete
                 Status = true
             };
             _userService.Add(user);
-            return  new SuccessResult<User>(Messages.UserRegistered, user);
+            return  new SuccessResult<User>(Messages.userRegistered, user);
         }
 
         public IResult<User> Login(UserLoginDto userLoginDto)
         {
-            var userToCheck = _userService.GetByMail(userLoginDto.Email);
+            var userToCheck = _userService.GetByMail(userLoginDto.Email).Data;
             if (userToCheck==null)
             {
-                return new FailResult<User>(Messages.UserNotFound);
+                return new FailResult<User>(Messages.userNotFound);
             }
 
             if (!HashingHelper.VerifyPasswordHash(userLoginDto.Password,userToCheck.PasswordHash,userToCheck.PasswordSalt))
             {
-                return new FailResult<User>(Messages.PasswordError);
+                return new FailResult<User>(Messages.passwordError);
             }
 
-            return new SuccessResult<User>(Messages.SuccessfulLogin, userToCheck);
+            return new SuccessResult<User>(Messages.successfulLogin, userToCheck);
         }
 
         public IResult<User> UserExists(string email)
         {
-            if (_userService.GetByMail(email)!=null)
+            if (_userService.GetByMail(email).Data!=null)
             {
-                return new FailResult<User>(Messages.UserAlreadyExists);
+                return new FailResult<User>(Messages.userAlreadyExists);
             }
             return new SuccessResult<User>();
         }
 
         public IResult<AccessToken> CreateAccessToken(User user)
         {
-            var claims = _userService.GetClaims(user);
+            var claims = _userService.GetClaims(user).Data;
             var accessToken = _tokenHelper.CreateToken(user, claims);
-            return new SuccessResult<AccessToken>(Messages.AccessTokenCreated, accessToken);
+            return new SuccessResult<AccessToken>(Messages.accessTokenCreated, accessToken);
         }
     }
 }

@@ -2,11 +2,10 @@
 
 namespace Core.Utilities.Filing.Local
 {
-    public class LocalFileSystem : IFileSytem
+    public abstract class LocalFileSystem : IFileSytem
     {
-        public string Path { get; }
-        public virtual void Filing(IFile file, string guid)
-        {
-        }
+        public abstract string Path { get; }
+        public abstract void Filing(IFile file, string guid);
+
     }
 }

@@ -5,7 +5,7 @@ namespace Core.Utilities.Filing.Local
 {
     public class ImageLocalFiling : LocalFileSystem
     {
-        public string Path
+        public override string Path
         {
             get { return _path; }
         }

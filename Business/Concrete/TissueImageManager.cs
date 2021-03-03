@@ -39,7 +39,7 @@ namespace Business.Concrete
 
             TissueImage tissueImage = new TissueImage()
             {
-                ImagePath = ((ImageLocalFiling)_localFileSystem).Path,
+                ImagePath = _localFileSystem.Path,
                 Guid = new GuidGenerator().Generator(),
                 Date = DateTime.Now,
                 TissueId = tissueId,

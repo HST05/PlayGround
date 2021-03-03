@@ -13,11 +13,13 @@ namespace Business.Consts
         public static string sortLimit = "Sort limit exceed";
         public static string imageCountExceed = "Image count exceed";
         public static string authorizationDenied = "No permission";
-        public static string AccessTokenCreated = "Token creation success";
-        public static string UserAlreadyExists = "User already exists";
-        public static string SuccessfulLogin = "Login success";
-        public static string PasswordError = "Password invalid";
-        public static string UserNotFound = "User not found";
-        public static string UserRegistered = "User registration success";
+        public static string accessTokenCreated = "Token creation success";
+        public static string userAlreadyExists = "User already exists";
+        public static string successfulLogin = "Login success";
+        public static string passwordError = "Password invalid";
+        public static string userNotFound = "User not found";
+        public static string userRegistered = "User registration success";
+        public static string claimsFetched = "Claims fetched successfully";
+        public static string userFetchedByMail = "User fetched successfully";
     }
 }

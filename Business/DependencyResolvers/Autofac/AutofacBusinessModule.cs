@@ -6,7 +6,6 @@ using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
 using Castle.DynamicProxy;
-using Core.Utilities.Filing;
 using Core.Utilities.Filing.Database;
 using Core.Utilities.Filing.Local;
 using Core.Utilities.Interceptors;
