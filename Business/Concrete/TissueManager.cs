@@ -48,11 +48,13 @@ namespace Business.Concrete
             return new SuccessResult<Tissue>(Messages.success, tissue);
         }
 
+        [CacheRemoveAspect("ITissueService.GetById")]
         public IResult<Tissue> Delete(Tissue tissue)
         {
             return new SuccessResult<Tissue>(Messages.success, tissue);
         }
 
+        [CacheRemoveAspect("ITissueService.GetById")]
         public IResult<Tissue> Update(Tissue tissue)
         {
             return new SuccessResult<Tissue>(Messages.success, tissue);
