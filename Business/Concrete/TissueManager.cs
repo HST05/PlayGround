@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Consts;
 using Business.Validations.FluentValidation;
 using Core.Abstract;
@@ -56,6 +57,7 @@ namespace Business.Concrete
             return new SuccessResult<Tissue>(Messages.success, tissue);
         }
 
+        [SecuredOperation("product.add,admin")]
         public IResult<Tissue> GetById(int id)
         {
             return new SuccessResult<Tissue>(Messages.success, _tissueDal.Get(p => p.Id == id));
