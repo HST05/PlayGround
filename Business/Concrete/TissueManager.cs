@@ -6,6 +6,7 @@ using Business.BusinessAspects.Autofac;
 using Business.Consts;
 using Business.Validations.FluentValidation;
 using Core.Abstract;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.BusinessRules;
@@ -58,6 +59,7 @@ namespace Business.Concrete
         }
 
         [SecuredOperation("product.add,admin")]
+        [CacheAspect]
         public IResult<Tissue> GetById(int id)
         {
             return new SuccessResult<Tissue>(Messages.success, _tissueDal.Get(p => p.Id == id));

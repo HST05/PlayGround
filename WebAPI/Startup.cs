@@ -58,10 +58,9 @@ namespace WebAPI
                     };
                 });
             //ServiceTool.Create(services);
-            services.AddDependencyResolvers(new ICoreModule[]
-            {
+            services.AddDependencyResolvers(
                 new CoreModule()
-            });
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
