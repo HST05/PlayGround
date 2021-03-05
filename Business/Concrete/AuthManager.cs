@@ -22,10 +22,10 @@ namespace Business.Concrete
             _tokenHelper = tokenHelper;
         }
 
-        public IResult<User> Register(UserRegisterDto userRegisterDto, string password)
+        public IResult<User> Register(UserRegisterDto userRegisterDto)
         {
             byte[] passwordHash, passwordSalt;
-            HashingHelper.CreatePasswordHash(password,out passwordHash,out passwordSalt);
+            HashingHelper.CreatePasswordHash(userRegisterDto.Password,out passwordHash,out passwordSalt);
             var user = new User
             {
                 Email = userRegisterDto.Email,
@@ -57,7 +57,7 @@ namespace Business.Concrete
 
         public IResult<User> UserExists(string email)
         {
-            if (_userService.GetByMail(email).Data!=null)
+            if (_userService.GetByMail(email).Success)
             {
                 return new FailResult<User>(Messages.userAlreadyExists);
             }
