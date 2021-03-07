@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
 using Business.Abstract;
 using Business.BusinessAspects.Autofac;
 using Business.Consts;
 using Business.Validations.FluentValidation;
-using Core.Abstract;
 using Core.Aspects.Autofac.Validation;
 using Core.Concrete.Files;
 using Core.Utilities.BusinessRules;
@@ -44,7 +42,7 @@ namespace Business.Concrete
                 Guid = new GuidGenerator().Generator(),
                 Date = DateTime.Now,
                 TissueId = tissueId,
-                Image = _databaseFileSytem.Filing(file)
+                Image = _databaseFileSytem.FileToBytes(file)
             };
 
             if (result != null)
@@ -66,20 +64,28 @@ namespace Business.Concrete
             return new SuccessResult<TissueImage>(Messages.success);
         }
 
-        public IResult<List<TissueImage>> GetImagesPerTissue(int tissueId)
+        public IResult<List<string>> GetImagesPerTissue(int tissueId)
         {
+            var stringImages = new List<string>();
             var result = BusinessRules<TissueImage>.Checker(IfImageExistCheck(tissueId));
 
-            if (result != null)
+            //code refactor lazım, diğer rule'ları bundan ayırıp if içinde if şeklinde(belki ?). (Tüm hataları gezip eğer başka hata varsa durdur.)
+            if (!result[0].Success)
             {
-                //default bir image dönücek aşağıda...
-                foreach (var error in result)
-                {
-                    return new FailResult<List<TissueImage>>(error.Message);
-                }
+                var defaultByteImage =_tissueImageDal.Get(p => p.TissueId == 5);
+                var stringImage = ((ImageDbFiling) _databaseFileSytem).BytesToImage(defaultByteImage.Image);
+                stringImages.Add(stringImage);
+                return new SuccessResult<List<string>>(Messages.success, stringImages);
             }
 
-            return new SuccessResult<List<TissueImage>>(Messages.success, _tissueImageDal.GetAll(p => p.TissueId == tissueId));
+            var byteImages = _tissueImageDal.GetAll(p => p.TissueId == tissueId);
+            foreach (var byteImage in byteImages)
+            {
+                var addedImage = ((ImageDbFiling)_databaseFileSytem).BytesToImage(byteImage.Image);
+                stringImages.Add(addedImage);
+            }
+
+            return new SuccessResult<List<string>>(Messages.success, stringImages);
         }
 
         public IResult<TissueImage> Update(TissueImage tissueImage)

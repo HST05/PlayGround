@@ -44,35 +44,19 @@ namespace WebAPI.Controllers
         {
             try
             {
-                var tissueImages = _tissueImageService.GetImagesPerTissue(tissueId).Data;
-                List<byte[]> byteImages = new List<byte[]>();
+                var result = _tissueImageService.GetImagesPerTissue(tissueId);
 
-                foreach (var tissueImage in tissueImages)
+                if (result.Success)
                 {
-                    byteImages.Add(tissueImage.Image);
+                    return Ok(result.Data);
                 }
 
-                List<byte[]> images = new List<byte[]>();
-
-                foreach (var byteImage in byteImages)
-                {
-                    var image = ImageConvert(Convert.ToBase64String(byteImage));
-                    images.Add(image);
-                }
-
-                return Ok();
+                return BadRequest(result.Message);
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
-        }
-
-        public byte[] ImageConvert(string s64String)
-        {
-            byte[] bytes = null;
-            bytes = Convert.FromBase64String(s64String);
-            return bytes;
         }
     }
 }

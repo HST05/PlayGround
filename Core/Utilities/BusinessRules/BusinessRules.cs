@@ -6,11 +6,11 @@ using FluentValidation.Internal;
 
 namespace Core.Utilities.BusinessRules
 {
-    public class BusinessRules<Type>
+    public class BusinessRules<T>
     {
-        public static List<IResult<Type>> Checker(params IResult<Type>[] rules)
+        public static List<IResult<T>> Checker(params IResult<T>[] rules)
         {
-            List<IResult<Type>> errors = new List<IResult<Type>>();
+            List<IResult<T>> errors = new List<IResult<T>>();
             foreach (var rule in rules)
             {
                 if (rule.Success=!true)
