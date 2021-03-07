@@ -29,8 +29,8 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<TissueImageManager>().As<ITissueImageService>().SingleInstance();
             builder.RegisterType<TissueImageDal>().As<ITissueImageDal>().SingleInstance();
 
-            builder.RegisterType<ImageLocalFiling>().As<LocalFileSystem>().SingleInstance();
-            builder.RegisterType<ImageDbFiling>().As<DatabaseFileSytem>().SingleInstance();
+            //builder.RegisterType<ImageLocalFiling>().As<LocalFileSystem>().SingleInstance();
+            //builder.RegisterType<ImageDbFiling>().As<DatabaseFileSytem>().SingleInstance();
 
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<UserDal>().As<IUserDal>();

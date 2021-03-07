@@ -24,11 +24,11 @@ namespace Business.Concrete
         private LocalFileSystem _localFileSystem;
         private DatabaseFileSytem _databaseFileSytem;
 
-        public TissueImageManager(ITissueImageDal tissueImageDal, LocalFileSystem localFileSystem, DatabaseFileSytem databaseFileSytem)
+        public TissueImageManager(ITissueImageDal tissueImageDal)
         {
             _tissueImageDal = tissueImageDal;
-            _localFileSystem = localFileSystem;
-            _databaseFileSytem = databaseFileSytem;
+            _localFileSystem = new ImageLocalFiling();
+            _databaseFileSytem = new ImageDbFiling();
         }
 
         [SecuredOperation("product.add,admin")]
@@ -71,9 +71,10 @@ namespace Business.Concrete
 
             if (result != null)
             {
+                //default bir image dönücek aşağıda...
                 foreach (var error in result)
                 {
-                    return new FailResult<List<TissueImage>>(error.Message); //default bir foto gelicek buraya
+                    return new FailResult<List<TissueImage>>(error.Message);
                 }
             }
 
@@ -104,7 +105,7 @@ namespace Business.Concrete
 
             if (result == 0)
             {
-                return new FailResult<TissueImage>(Messages.imageCountExceed);
+                return new FailResult<TissueImage>(Messages.imageNotExists);
             }
             return new SuccessResult<TissueImage>(Messages.success);
         }

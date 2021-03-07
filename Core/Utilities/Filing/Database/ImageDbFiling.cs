@@ -3,7 +3,7 @@ using Core.Abstract;
 
 namespace Core.Utilities.Filing.Database
 {
-    public class ImageDbFiling:DatabaseFileSytem
+    public class ImageDbFiling : DatabaseFileSytem
     {
         public override byte[] Filing(IFile file)
         {
