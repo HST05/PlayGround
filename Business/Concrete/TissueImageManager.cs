@@ -8,6 +8,7 @@ using Business.Consts;
 using Business.Validations.FluentValidation;
 using Core.Abstract;
 using Core.Aspects.Autofac.Validation;
+using Core.Concrete.Files;
 using Core.Utilities.BusinessRules;
 using Core.Utilities.Filing.Database;
 using Core.Utilities.Filing.Local;
@@ -33,7 +34,7 @@ namespace Business.Concrete
 
         [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(TissueImageValidator))]
-        public IResult<TissueImage> Add(IFile file, int tissueId)
+        public IResult<TissueImage> Add(Image file, int tissueId)
         {
             var result = BusinessRules<TissueImage>.Checker(ImageCountChecker(tissueId));
 

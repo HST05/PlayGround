@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using Core.Abstract;
+using Core.Concrete.Files;
 using Entities.Concrete;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 
 namespace Business.Validations.FluentValidation
 {
-    public class TissueImageValidator : AbstractValidator<IFile>
+    public class TissueImageValidator : AbstractValidator<Image>
     {
         public TissueImageValidator()
         {
