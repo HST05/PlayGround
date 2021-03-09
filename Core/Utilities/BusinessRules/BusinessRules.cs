@@ -13,7 +13,7 @@ namespace Core.Utilities.BusinessRules
             List<IResult<T>> errors = new List<IResult<T>>();
             foreach (var rule in rules)
             {
-                if (rule.Success=!true)
+                if (rule.Success!=true)
                 {
                     errors.Add(rule);
                 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Core.Abstract;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Utilities.Filing.Database
 {
@@ -21,6 +22,7 @@ namespace Core.Utilities.Filing.Database
             using (var memory = new MemoryStream(bytes))
             {
                 
+                //return new FileContentResult(bytes, "image/png");
                 return Convert.ToBase64String(bytes);
                 //System.IO.File.WriteAllBytes("path",bytes);
             }

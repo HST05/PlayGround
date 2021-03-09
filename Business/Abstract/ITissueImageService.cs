@@ -14,6 +14,6 @@ namespace Business.Abstract
         IResult<TissueImage> Add(Image file, int tissueId);
         IResult<TissueImage> Delete(TissueImage tissueImage);
         IResult<TissueImage> Update(TissueImage tissueImage);
-        IResult<List<string>> GetImagesPerTissue(int tissueId);
+        IResult<List<TissueImage>> GetImagesPerTissue(int tissueId);
     }
 }

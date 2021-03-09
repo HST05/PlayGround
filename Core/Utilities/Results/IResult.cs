@@ -1,9 +1,12 @@
-﻿namespace Core.Utilities.Result
+﻿using System.Collections.Generic;
+
+namespace Core.Utilities.Result
 {
     public interface IResult<T>
     {
         T Data { get; }
         bool Success { get; set; }
         string Message { get; set; }
+        List<string> Messages { get; set; }
     }
 }

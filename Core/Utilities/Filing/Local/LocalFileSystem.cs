@@ -1,4 +1,5 @@
-﻿using Core.Abstract;
+﻿using System;
+using Core.Abstract;
 
 namespace Core.Utilities.Filing.Local
 {
