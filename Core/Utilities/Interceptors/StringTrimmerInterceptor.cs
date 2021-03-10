@@ -20,8 +20,8 @@ namespace Core.Utilities.Interceptors
         public override InterceptionResult<DbDataReader> ReaderExecuting(DbCommand command, CommandEventData eventData,
             InterceptionResult<DbDataReader> result)
         {
-            var anan = eventData.Context.Model.GetEntityTypes();
-            foreach (Microsoft.EntityFrameworkCore.Metadata.IEntityType tip in anan)
+            var test = eventData.Context.Model.GetEntityTypes();
+            foreach (Microsoft.EntityFrameworkCore.Metadata.IEntityType tip in test)
             {
                 var alts = tip.ClrType.GetProperties();
                 foreach (System.Reflection.PropertyInfo alt in alts)
