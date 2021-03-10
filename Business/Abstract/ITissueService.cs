@@ -16,6 +16,5 @@ namespace Business.Abstract
         IResult<List<Tissue>> GetAll();
         IResult<Tissue> GetById(int id);
         IResult<List<ProductDetailDto>> GetDetail();
-
     }
 }

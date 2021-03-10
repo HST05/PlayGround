@@ -7,6 +7,5 @@ namespace Core.Utilities.Result
         T Data { get; }
         bool Success { get; set; }
         string Message { get; set; }
-        List<string> Messages { get; set; }
     }
 }

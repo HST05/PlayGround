@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Business.Abstract;
 using Business.BusinessAspects.Autofac;
@@ -33,8 +34,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(TissueValidator))]
         public IResult<Tissue> Add(Tissue tissue)
         {
-            //ValidationTool.Validate(new TissueValidator(), tissue);
-            var result = BusinessRules<Tissue>.Checker(DuplicateNameChecker(tissue.Name), SortLimitExceedChecker(3));
+            var result = BusinessRules<Tissue>.Checker(DuplicateNameChecker(tissue.Name));
 
             if (result != null)
             {
@@ -69,10 +69,25 @@ namespace Business.Concrete
 
         public IResult<List<Tissue>> GetAll()
         {
-            if (DateTime.Now.Hour == 17)
-            {
-                return new FailResult<List<Tissue>>(Messages.fail);
-            }
+            //if (DateTime.Now.Hour == 19)
+            //{
+            //    return new FailResult<List<Tissue>>(Messages.fail);
+            //}
+
+            //var tissues = _tissueDal.GetAll();
+            //List<Tissue> tss = new List<Tissue>();
+
+            //foreach (var ts in tissues)
+            //{
+            //    tss.Add(new Tissue(){
+            //        Name = ts.Name.TrimEnd(),
+            //        Gender = ts.Gender,
+            //        Id = ts.Id,
+            //        RegionId = ts.RegionId,
+            //        SortId = ts.SortId
+            //        });
+            //}
+
             return new SuccessResult<List<Tissue>>(Messages.success, _tissueDal.GetAll());
         }
 
@@ -83,22 +98,11 @@ namespace Business.Concrete
 
         private IResult<Tissue> DuplicateNameChecker(string productName)
         {
-            var result = _tissueDal.GetAll(p => p.Name == productName).Any();
+            var result = (_tissueDal.GetAll(p => p.Name == productName).Any());
 
-            if (!result)
+            if (result)
             {
                 return new FailResult<Tissue>(Messages.duplicateName);
-            }
-            return new SuccessResult<Tissue>(Messages.success);
-        }
-
-        private IResult<Tissue> SortLimitExceedChecker(int sortId)
-        {
-            var result = _sortService.GetAll().Data.Count;
-
-            if (result>15)
-            {
-                return new FailResult<Tissue>(Messages.sortLimit);
             }
             return new SuccessResult<Tissue>(Messages.success);
         }

@@ -16,7 +16,7 @@ namespace Business.Validations.FluentValidation
 
         private bool StartsWithN(string arg)
         {
-            return arg.StartsWith("N");
+            return arg.StartsWith("U");
         }
     }
 }

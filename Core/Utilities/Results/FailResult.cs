@@ -13,10 +13,5 @@ namespace Core.Utilities.Result
         {
 
         }
-
-        public FailResult(List<string> messages) : base(false, messages)
-        {
-
-        }
     }
 }

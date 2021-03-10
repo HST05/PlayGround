@@ -44,7 +44,6 @@ namespace WebAPI.Controllers
             }
 
             return BadRequest(result);
-
         }
 
         [HttpGet("getdetail")]
@@ -57,7 +56,6 @@ namespace WebAPI.Controllers
             }
 
             return BadRequest(result);
-
         }
 
         [HttpPost("add")]

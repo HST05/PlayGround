@@ -71,20 +71,10 @@ namespace Business.Concrete
          
             if (result != null)
             {
-                List<string> errors = new List<string>();
-                foreach (var error in result)
-                {
-                    errors.Add(error.Message);
-                }
-
                 if (!result[0].Success)
                 {
                     var defaultByteImage = _tissueImageDal.GetAll(p => p.TissueId == 0);
                     return new FailResult<List<TissueImage>>(result[0].Message, defaultByteImage);
-                }
-                else
-                {
-                    return new FailResult<List<TissueImage>>(errors);
                 }
             }
 
