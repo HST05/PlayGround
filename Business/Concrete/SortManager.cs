@@ -39,7 +39,7 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
-        public IResult<List<ProductDetailDto>> GetDetail()
+        public IResult<List<TissueDetailDto>> GetDetail()
         {
             throw new NotImplementedException();
         }

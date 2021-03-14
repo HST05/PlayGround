@@ -35,9 +35,21 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult Get(int id)
+        public IActionResult GetById(int id)
         {
             var result = _tissueService.GetById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbysort")]
+        public IActionResult GetBySort(int sortId)
+        {
+            var result = _tissueService.GetBySortId(sortId);
             if (result.Success)
             {
                 return Ok(result);

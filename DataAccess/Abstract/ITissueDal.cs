@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Core.Abstract;
-using Core.DataAccess.EntityFramework;
 using Entities;
+using System.Linq.Expressions;
 
 namespace DataAccess.Abstract
 {
     public interface ITissueDal:IEntityRepository<Tissue>
     {
-        List<ProductDetailDto> GetDetail();
+        List<TissueDetailDto> GetDetail();
+        List<TissueDetailDto> GetDetailBySort(int sortId);
     }
 }

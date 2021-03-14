@@ -9,18 +9,46 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class TissueDal : EFEntityRepositoryBase<AnatomyDB, Tissue>, ITissueDal
     {
-        public List<ProductDetailDto> GetDetail()
+        public List<TissueDetailDto> GetDetail()
         {
             using (AnatomyDB context = new AnatomyDB())
             {
                 var result = from t in context.Tissues
                              join r in context.Regions on t.RegionId equals r.Id
-                             join s in context.Sorts on t.SortId equals s.Id                                                
-                    select new ProductDetailDto {Id = t.Id, Region = r.Name, Name = t.Name, Gender = t.Gender, Sort = s.Name, Origin = s.Origin};
+                             join s in context.Sorts on t.SortId equals s.Id
+                             select new TissueDetailDto
+                             {
+                                 Id = t.Id,
+                                 Region = r.Name,
+                                 Name = t.Name,
+                                 Gender = t.Gender,
+                                 Sort = s.Name,
+                                 Origin = s.Origin
+                             };
                 return result.ToList();
             }
 
         }
-        
+
+        public List<TissueDetailDto> GetDetailBySort(int sortId)
+        {
+            using (AnatomyDB context = new AnatomyDB())
+            {
+                var result = from t in context.Tissues
+                    join r in context.Regions on t.RegionId equals r.Id
+                    join s in context.Sorts on t.SortId equals s.Id
+                    where (s.Id==sortId)
+                    select new TissueDetailDto
+                    {
+                        Id = t.Id,
+                        Region = r.Name,
+                        Name = t.Name,
+                        Gender = t.Gender,
+                        Sort = s.Name,
+                        Origin = s.Origin
+                    };
+                return result.ToList();
+            }
+        }
     }
 }

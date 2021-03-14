@@ -14,6 +14,6 @@ namespace Business.Abstract
         IResult<Sort> Update(Sort sort);
         IResult<List<Sort>> GetAll();
         IResult<Sort> GetById(int id);
-        IResult<List<ProductDetailDto>> GetDetail();
+        IResult<List<TissueDetailDto>> GetDetail();
     }
 }

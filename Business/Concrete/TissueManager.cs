@@ -6,16 +6,13 @@ using Business.Abstract;
 using Business.BusinessAspects.Autofac;
 using Business.Consts;
 using Business.Validations.FluentValidation;
-using Core.Abstract;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
-using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.BusinessRules;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities;
 using Entities.Concrete;
-using FluentValidation;
 using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Business.Concrete
@@ -67,6 +64,11 @@ namespace Business.Concrete
             return new SuccessResult<Tissue>(Messages.success, _tissueDal.Get(p => p.Id == id));
         }
 
+        public IResult<List<TissueDetailDto>> GetBySortId(int sortId)
+        {
+            return new SuccessResult<List<TissueDetailDto>>(Messages.success, _tissueDal.GetDetailBySort(sortId));
+        }
+
         public IResult<List<Tissue>> GetAll()
         {
             //if (DateTime.Now.Hour == 19)
@@ -91,9 +93,9 @@ namespace Business.Concrete
             return new SuccessResult<List<Tissue>>(Messages.success, _tissueDal.GetAll());
         }
 
-        public IResult<List<ProductDetailDto>> GetDetail()
+        public IResult<List<TissueDetailDto>> GetDetail()
         {
-            return new SuccessResult<List<ProductDetailDto>>(Messages.success, _tissueDal.GetDetail());
+            return new SuccessResult<List<TissueDetailDto>>(Messages.success, _tissueDal.GetDetail());
         }
 
         private IResult<Tissue> DuplicateNameChecker(string productName)

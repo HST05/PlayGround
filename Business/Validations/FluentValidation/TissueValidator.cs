@@ -11,12 +11,12 @@ namespace Business.Validations.FluentValidation
         public TissueValidator()
         {
             RuleFor(p => p.Name).MinimumLength(2);
-            RuleFor(p => p.Name).Must(StartsWithN).WithMessage("Ürün adı N ile başlamalı");
+            RuleFor(p => p.Name).Must(StartsWithM).WithMessage("Ürün adı M ile başlamalı");
         }
 
-        private bool StartsWithN(string arg)
+        private bool StartsWithM(string arg)
         {
-            return arg.StartsWith("U");
+            return arg.StartsWith("M");
         }
     }
 }
