@@ -17,14 +17,14 @@ namespace UI
             Console.ReadLine();
         }
 
-        private static void NewMethod()
-        {
-            ITissueService tissueService = new TissueManager(new TissueDal(), new SortManager(new SortDal()));
+        //private static void NewMethod()
+        //{
+        //    ITissueService tissueService = new TissueManager(new TissueDal(), new SortManager(new SortDal()));
 
-            foreach (var tissue in tissueService.GetDetail().Data)
-            {
-                Console.WriteLine(tissue.Id + ":" + tissue.Name + "," + tissue.Sort + "," + tissue.Region + "," + tissue.Origin);
-            }
-        }
+        //    foreach (var tissue in tissueService.GetDetail().Data)
+        //    {
+        //        Console.WriteLine(tissue.Id + ":" + tissue.Name + "," + tissue.Sort + "," + tissue.Region + "," + tissue.Origin);
+        //    }
+        //}
     }
 }

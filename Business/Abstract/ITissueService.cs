@@ -15,9 +15,6 @@ namespace Business.Abstract
         IResult<Tissue> Update(Tissue tissue);
         IResult<List<Tissue>> GetAll();
         IResult<Tissue> GetById(int id);
-        IResult<List<TissueDetailDto>> GetDetail();
-        IResult<List<TissueDetailDto>> GetBySortId(int sortId);
-        IResult<List<TissueDetailDto>> GetByRegionId(int regionId);
-        IResult<List<TissueDetailDto>> GetBySort_RegionId(int sortId, int regionId);
+        IResult<List<TissueDetailDto>> GetByFilter(int? id, int? sortId, int? regionId);
     }
 }

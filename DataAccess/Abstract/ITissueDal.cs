@@ -10,10 +10,7 @@ namespace DataAccess.Abstract
 {
     public interface ITissueDal:IEntityRepository<Tissue>
     {
-        List<TissueDetailDto> GetDetail();
-        List<TissueDetailDto> GetDetailBySort(int sortId);
-        List<TissueDetailDto> GetDetailByRegion(int regionId);
-        List<TissueDetailDto> GetDetailBySort_Region(int sortId, int regionId);
+        List<TissueDetailDto> GetDetailByFilter(int? id, int? sortId, int? regionId);
 
     }
 }

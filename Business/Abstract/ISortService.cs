@@ -9,11 +9,7 @@ namespace Business.Abstract
 {
     public interface ISortService
     {
-        IResult<Sort> Add(Sort sort);
-        IResult<Sort> Delete(Sort sort);
-        IResult<Sort> Update(Sort sort);
         IResult<List<Sort>> GetAll();
         IResult<Sort> GetById(int id);
-        IResult<List<TissueDetailDto>> GetDetail();
     }
 }

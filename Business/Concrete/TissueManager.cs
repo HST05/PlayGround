@@ -64,19 +64,9 @@ namespace Business.Concrete
             return new SuccessResult<Tissue>(Messages.success, _tissueDal.Get(p => p.Id == id));
         }
 
-        public IResult<List<TissueDetailDto>> GetBySortId(int sortId)
+        public IResult<List<TissueDetailDto>> GetByFilter(int? id, int? sortId, int? regionId)
         {
-            return new SuccessResult<List<TissueDetailDto>>(Messages.success, _tissueDal.GetDetailBySort(sortId));
-        }
-
-        public IResult<List<TissueDetailDto>> GetByRegionId(int regionId)
-        {
-            return new SuccessResult<List<TissueDetailDto>>(Messages.success, _tissueDal.GetDetailByRegion(regionId));
-        }
-
-        public IResult<List<TissueDetailDto>> GetBySort_RegionId(int sortId, int regionId)
-        {
-            return new SuccessResult<List<TissueDetailDto>>(Messages.success, _tissueDal.GetDetailBySort_Region(sortId, regionId));
+            return new SuccessResult<List<TissueDetailDto>>(Messages.success, _tissueDal.GetDetailByFilter(id, sortId, regionId));
         }
 
         public IResult<List<Tissue>> GetAll()
@@ -101,11 +91,6 @@ namespace Business.Concrete
             //}
 
             return new SuccessResult<List<Tissue>>(Messages.success, _tissueDal.GetAll());
-        }
-
-        public IResult<List<TissueDetailDto>> GetDetail()
-        {
-            return new SuccessResult<List<TissueDetailDto>>(Messages.success, _tissueDal.GetDetail());
         }
 
         private IResult<Tissue> DuplicateNameChecker(string productName)
