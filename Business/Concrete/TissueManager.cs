@@ -69,6 +69,16 @@ namespace Business.Concrete
             return new SuccessResult<List<TissueDetailDto>>(Messages.success, _tissueDal.GetDetailBySort(sortId));
         }
 
+        public IResult<List<TissueDetailDto>> GetByRegionId(int regionId)
+        {
+            return new SuccessResult<List<TissueDetailDto>>(Messages.success, _tissueDal.GetDetailByRegion(regionId));
+        }
+
+        public IResult<List<TissueDetailDto>> GetBySort_RegionId(int sortId, int regionId)
+        {
+            return new SuccessResult<List<TissueDetailDto>>(Messages.success, _tissueDal.GetDetailBySort_Region(sortId, regionId));
+        }
+
         public IResult<List<Tissue>> GetAll()
         {
             //if (DateTime.Now.Hour == 19)
@@ -107,6 +117,6 @@ namespace Business.Concrete
                 return new FailResult<Tissue>(Messages.duplicateName);
             }
             return new SuccessResult<Tissue>(Messages.success);
-        }
+        }  
     }
 }

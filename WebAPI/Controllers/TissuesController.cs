@@ -58,6 +58,30 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getbyregion")]
+        public IActionResult GetByRegion(int regionId)
+        {
+            var result = _tissueService.GetByRegionId(regionId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbysort_region")]
+        public IActionResult GetBySort_Region(int sortId, int regionId)
+        {
+            var result = _tissueService.GetBySort_RegionId(sortId, regionId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
         [HttpGet("getdetail")]
         public IActionResult GetDetail()
         {

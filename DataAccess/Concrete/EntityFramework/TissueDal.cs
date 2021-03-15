@@ -30,14 +30,14 @@ namespace DataAccess.Concrete.EntityFramework
 
         }
 
-        public List<TissueDetailDto> GetDetailBySort(int sortId)
+        public List<TissueDetailDto> GetDetailByRegion(int regionId)
         {
             using (AnatomyDB context = new AnatomyDB())
             {
                 var result = from t in context.Tissues
                     join r in context.Regions on t.RegionId equals r.Id
                     join s in context.Sorts on t.SortId equals s.Id
-                    where (s.Id==sortId)
+                    where (r.Id == regionId)
                     select new TissueDetailDto
                     {
                         Id = t.Id,
@@ -47,6 +47,49 @@ namespace DataAccess.Concrete.EntityFramework
                         Sort = s.Name,
                         Origin = s.Origin
                     };
+                return result.ToList();
+            }
+        }
+
+        public List<TissueDetailDto> GetDetailBySort(int sortId)
+        {
+            using (AnatomyDB context = new AnatomyDB())
+            {
+                var result = from t in context.Tissues
+                             join r in context.Regions on t.RegionId equals r.Id
+                             join s in context.Sorts on t.SortId equals s.Id
+                             where (s.Id == sortId)
+                             select new TissueDetailDto
+                             {
+                                 Id = t.Id,
+                                 Region = r.Name,
+                                 Name = t.Name,
+                                 Gender = t.Gender,
+                                 Sort = s.Name,
+                                 Origin = s.Origin
+                             };
+                return result.ToList();
+            }
+        }
+
+        public List<TissueDetailDto> GetDetailBySort_Region(int sortId, int regionId)
+        {
+            using (AnatomyDB context = new AnatomyDB())
+            {
+                var result = from t in context.Tissues
+                             join r in context.Regions on t.RegionId equals r.Id
+                             join s in context.Sorts on t.SortId equals s.Id
+                             where s.Id == sortId
+                             where r.Id == regionId
+                             select new TissueDetailDto
+                             {
+                                 Id = t.Id,
+                                 Region = r.Name,
+                                 Name = t.Name,
+                                 Gender = t.Gender,
+                                 Sort = s.Name,
+                                 Origin = s.Origin
+                             };
                 return result.ToList();
             }
         }

@@ -17,5 +17,7 @@ namespace Business.Abstract
         IResult<Tissue> GetById(int id);
         IResult<List<TissueDetailDto>> GetDetail();
         IResult<List<TissueDetailDto>> GetBySortId(int sortId);
+        IResult<List<TissueDetailDto>> GetByRegionId(int regionId);
+        IResult<List<TissueDetailDto>> GetBySort_RegionId(int sortId, int regionId);
     }
 }

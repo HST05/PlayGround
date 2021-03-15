@@ -25,6 +25,9 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<SortManager>().As<ISortService>().SingleInstance();
             builder.RegisterType<SortDal>().As<ISortDal>().SingleInstance();
+
+            builder.RegisterType<RegionManager>().As<IRegionService>().SingleInstance();
+            builder.RegisterType<RegionDal>().As<IRegionDal>().SingleInstance();
             
             builder.RegisterType<TissueImageManager>().As<ITissueImageService>().SingleInstance();
             builder.RegisterType<TissueImageDal>().As<ITissueImageDal>().SingleInstance();

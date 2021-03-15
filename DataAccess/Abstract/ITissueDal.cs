@@ -12,5 +12,8 @@ namespace DataAccess.Abstract
     {
         List<TissueDetailDto> GetDetail();
         List<TissueDetailDto> GetDetailBySort(int sortId);
+        List<TissueDetailDto> GetDetailByRegion(int regionId);
+        List<TissueDetailDto> GetDetailBySort_Region(int sortId, int regionId);
+
     }
 }
