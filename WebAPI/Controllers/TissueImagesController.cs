@@ -42,8 +42,8 @@ namespace WebAPI.Controllers
             try
             {
                 var result = _tissueImageService.GetImagesPerTissue(tissueId);
-
-                if (result.Data != null)
+                
+                if (result.Data != default)
                 {
                     return Ok(result);
                 }
